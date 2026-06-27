@@ -11,7 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Configurar Node
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: '18'
@@ -26,15 +26,15 @@ jobs:
         run: |
           npm install -g sonar-scanner
           sonar-scanner \
-            -Dsonar.projectKey=app-sonar \
+            -Dsonar.projectKey=davidelezg-lab_app-sonar \
             -Dsonar.organization=davidelezg-lab \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+            -Dsonar.qualitygate.wait=true
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-
     steps:
       - name: Simular deploy
         run: echo "Deploy OK"
