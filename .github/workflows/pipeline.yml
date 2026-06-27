@@ -1,30 +1,34 @@
 name: Pipeline avanzado
 
-on: [push]
+on:
+  push:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      - name: Configurar Node
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - run: npm ci
+      - name: Instalar dependencias
+        run: npm ci
 
-      - name: Tests
+      - name: Ejecutar tests
         run: npm test
 
-      - name: Sonar
+      - name: SonarCloud Scan
         run: |
           npm install -g sonar-scanner
           sonar-scanner \
             -Dsonar.projectKey=app-sonar \
-            -Dsonar.sources=. \
-            -Dsonar.host.url=${{ secrets.SONAR_HOST }} \
+            -Dsonar.organization=davidelezg-lab \
+            -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
   deploy:
