@@ -1,0 +1,28 @@
+name: Pipeline con Sonar
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v3
+
+      - name: Instalar Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Ejecutar Sonar
+        run: |
+          npm install -g sonar-scanner
+          sonar-scanner </span>
+            -Dsonar.projectKey=app-sonar </span>
+            -Dsonar.sources=. </span>
+            -Dsonar.host.url=${{ secrets.SONAR_HOST }} </span>
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
