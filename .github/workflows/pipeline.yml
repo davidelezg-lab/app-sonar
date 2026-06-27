@@ -30,3 +30,7 @@ jobs:
             -Dsonar.sources=. \
             -Dsonar.host.url=${{ secrets.SONAR_HOST }} \
             -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+            
+      - name: Esperar Quality Gate
+        run: |
+          sleep 10
