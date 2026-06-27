@@ -23,7 +23,7 @@ jobs:
           npm install -g sonar-scanner
           sonar-scanner \
             -Dsonar.projectKey=app-sonar \
-            -Dsonar.organization=TU_ORG \
+            -Dsonar.organization=davidelez-lab \
             -Dsonar.sources=. \
             -Dsonar.host.url=${{ secrets.SONAR_HOST }} \
             -Dsonar.token=${{ secrets.SONAR_TOKEN }}
