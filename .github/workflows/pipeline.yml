@@ -21,8 +21,9 @@ jobs:
       - name: Ejecutar Sonar
         run: |
           npm install -g sonar-scanner
-          sonar-scanner </span>
-            -Dsonar.projectKey=app-sonar </span>
-            -Dsonar.sources=. </span>
-            -Dsonar.host.url=${{ secrets.SONAR_HOST }} </span>
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          sonar-scanner \
+            -Dsonar.projectKey=app-sonar \
+            -Dsonar.organization=TU_ORG \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST }} \
+            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
