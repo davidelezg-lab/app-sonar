@@ -1,4 +1,4 @@
-name: Pipeline con Tests + Sonar
+name: Pipeline avanzado
 
 on: [push]
 
@@ -7,30 +7,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Descargar código
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Instalar Node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: Instalar dependencias
-        run: npm ci
+      - run: npm install
 
-      - name: Ejecutar tests
+      - name: Tests
         run: npm test
 
-      - name: Ejecutar Sonar
+      - name: Sonar
         run: |
           npm install -g sonar-scanner
-          sonar-scanner \
-            -Dsonar.projectKey=app-sonar \
-            -Dsonar.organization=davidelezg-lab \
-            -Dsonar.sources=. \
-            -Dsonar.host.url=${{ secrets.SONAR_HOST }} \
-            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
-            
-      - name: Esperar Quality Gate
-        run: |
-          sleep 10
+          sonar-scanner </span>
+            -Dsonar.projectKey=app-sonar </span>
+            -Dsonar.sources=. </span>
+            -Dsonar.host.url=${{ secrets.SONAR_HOST }} </span>
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Simular deploy
+        run: echo "Deploy OK"
