@@ -1,0 +1,7 @@
+organization=davidelezg-lab
+projectKey=app-sonar
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.93576
+dashboardUrl=https://sonarcloud.io/dashboard?id=app-sonar
+ceTaskId=AZ8IO-LSWpFXLLsPCciq
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZ8IO-LSWpFXLLsPCciq
