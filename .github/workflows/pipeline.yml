@@ -16,15 +16,15 @@ jobs:
       - run: npm install
 
       - name: Tests
-        run: npm test
+        run: npx jest --coverage
 
       - name: Sonar
         run: |
           npm install -g sonar-scanner
-          sonar-scanner </span>
-            -Dsonar.projectKey=app-sonar </span>
-            -Dsonar.sources=. </span>
-            -Dsonar.host.url=${{ secrets.SONAR_HOST }} </span>
+          sonar-scanner \
+            -Dsonar.projectKey=app-sonar \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST }} \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
   deploy:
