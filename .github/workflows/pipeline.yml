@@ -1,4 +1,4 @@
-name: Pipeline con Sonar
+name: Pipeline con Tests + Sonar
 
 on: [push]
 
@@ -16,7 +16,10 @@ jobs:
           node-version: '18'
 
       - name: Instalar dependencias
-        run: npm install
+        run: npm ci
+
+      - name: Ejecutar tests
+        run: npm test
 
       - name: Ejecutar Sonar
         run: |
@@ -27,6 +30,3 @@ jobs:
             -Dsonar.sources=. \
             -Dsonar.host.url=${{ secrets.SONAR_HOST }} \
             -Dsonar.token=${{ secrets.SONAR_TOKEN }}
-
-      - name: Ejecutar los tests
-        run: npm test
